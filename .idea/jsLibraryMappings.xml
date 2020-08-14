@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{@types/enzyme, @types/jest, @types/prop-types, @types/react-dom, @types/recompose, @types/storybook-addon-jsx, @types/storybook__addon-info}" />
+  </component>
+</project>

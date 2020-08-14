@@ -7,21 +7,25 @@ describe('Appointment', () => {
     let container;
     let customer;
 
+    beforeEach(() => {
+        container = document.createElement('div');
+    });
+
+    const render = component => ReactDOM.render(component, container);
+
     it('renders the customer first name', () => {
         customer = {firstName: 'Ashley'};
-        container = document.createElement('div');
         document.body.appendChild(container);
 
-        ReactDOM.render(<Appointment customer={customer}/>, container);
+        render(<Appointment customer={customer}/>);
 
         expect(document.body.textContent).toMatch('Ashley');
     });
     it('renders another customer first name', () => {
         customer = {firstName: 'Jordan'};
-        container = document.createElement('div');
         document.body.appendChild(container);
 
-        ReactDOM.render(<Appointment customer={customer}/>, container);
+        render(<Appointment customer={customer}/>);
 
         expect(document.body.textContent).toMatch('Jordan');
     });

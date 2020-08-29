@@ -7,6 +7,13 @@ export const customer = {
     firstName: "Ashley"
 }
 
+const today = new Date()
+
+export const appointments = [
+    {startsAt: today.setHours(12, 0)},
+    {startsAt: today.setHours(13, 0)}
+];
+
 storiesOf('Appointment', module)
     .add('Appointment', () => <Appointment customer={customer} />)
-    .add('AppointmentsDayView', () => <AppointmentsDayView />);
+    .add('AppointmentsDayView', () => <AppointmentsDayView appointments={appointments} />);

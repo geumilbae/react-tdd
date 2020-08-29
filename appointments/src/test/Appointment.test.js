@@ -5,6 +5,7 @@ import {
     Appointment,
     AppointmentsDayView
 } from '../Appointment';
+import App from "../App";
 
 describe('Appointment', () => {
     let container;
@@ -30,6 +31,17 @@ describe('Appointment', () => {
 
 describe('AppointmentsDayView', () => {
     let container;
+    const today = new Date();
+    const appointments = [
+        {
+            startsAt: today.setHours(12, 0),
+            customer: {firstName: 'Ashley'}
+        },
+        {
+            startsAt: today.setHours(13, 0),
+            customer: {firstName: 'Jordan'}
+        }
+    ];
 
     beforeEach(() => {
         container = document.createElement('div');
@@ -42,21 +54,11 @@ describe('AppointmentsDayView', () => {
         expect(container.querySelector('div#appointmentsDayView')).not.toBeNull();
     });
     it('renders multiple appointmentse in an ol element', () => {
-        const today = new Date();
-        const appointments = [
-            {startsAt: today.setHours(12, 0)},
-            {startsAt: today.setHours(13, 0)}
-        ];
         render(<AppointmentsDayView appointments={appointments} />);
         expect(container.querySelector('ol')).not.toBeNull();
         expect(container.querySelector('ol').children).toHaveLength(2);
     });
     it('renders each appointment in an li', () => {
-        const today = new Date();
-        const appointments = [
-            {startsAt: today.setHours(12, 0)},
-            {startsAt: today.setHours(13, 0)}
-        ];
         render(<AppointmentsDayView appointments={appointments} />);
         expect(container.querySelectorAll('li')).toHaveLength(2);
         expect(
@@ -65,5 +67,15 @@ describe('AppointmentsDayView', () => {
         expect(
             container.querySelectorAll('li')[1].textContent
         ).toEqual('13:00');
+    });
+    it('initially shows a message saying there are no appointments today', () => {
+        render(<AppointmentsDayView appointments={[]} />);
+        expect(container.textContent).toMatch(
+            'There are no appointments scheduled for today.'
+        );
+    });
+    it('selects the first appointment by default', () => {
+        render(<AppointmentsDayView appointments={appointments} />);
+        expect(container.textContent).toMatch('Ashley');
     });
 });

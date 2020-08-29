@@ -10,8 +10,14 @@ export const customer = {
 const today = new Date()
 
 export const appointments = [
-    {startsAt: today.setHours(12, 0)},
-    {startsAt: today.setHours(13, 0)}
+    {
+        startsAt: today.setHours(12, 0),
+        customer: {firstName: 'Ashley'}
+    },
+    {
+        startsAt: today.setHours(13, 0),
+        customer: {firstName: 'Jordan'}
+    }
 ];
 
 storiesOf('Appointment', module)

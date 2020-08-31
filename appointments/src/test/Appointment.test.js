@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
 
 import {
     Appointment,
     AppointmentsDayView
 } from '../Appointment';
-import App from "../App";
 
 describe('Appointment', () => {
     let container;
@@ -17,12 +17,12 @@ describe('Appointment', () => {
 
     const render = component => ReactDOM.render(component, container);
 
-    it('renders the customer first name', () => {
+    it('고객의 퍼스트네임이 화면에 표시되는가?', () => {
         customer = {firstName: 'Ashley'};
         render(<Appointment customer={customer} />);
         expect(container.textContent).toMatch('Ashley');
     });
-    it('renders another customer first name', () => {
+    it('또다른 고객의 퍼스트네임도 화면에 표시되는가?', () => {
         customer = {firstName: 'Jordan'};
         render(<Appointment customer={customer} />);
         expect(container.textContent).toMatch('Jordan');
@@ -49,16 +49,16 @@ describe('AppointmentsDayView', () => {
 
     const render = component => ReactDOM.render(component, container);
 
-    it('renders a div with the right id', () => {
+    it('화면에 이 컴포넌트를 가리키는 id를 가진 div가 표시되는가?', () => {
         render(<AppointmentsDayView appointments={[]} />);
         expect(container.querySelector('div#appointmentsDayView')).not.toBeNull();
     });
-    it('renders multiple appointmentse in an ol element', () => {
+    it('여러 개의 appointments가 ol 태그 안에 표시되는가?', () => {
         render(<AppointmentsDayView appointments={appointments} />);
         expect(container.querySelector('ol')).not.toBeNull();
         expect(container.querySelector('ol').children).toHaveLength(2);
     });
-    it('renders each appointment in an li', () => {
+    it('각각의 appointment가 li 태그 안에 존재하면서, 예약 시간을 제대로 화면에 표시하는가?', () => {
         render(<AppointmentsDayView appointments={appointments} />);
         expect(container.querySelectorAll('li')).toHaveLength(2);
         expect(
@@ -68,14 +68,25 @@ describe('AppointmentsDayView', () => {
             container.querySelectorAll('li')[1].textContent
         ).toEqual('13:00');
     });
-    it('initially shows a message saying there are no appointments today', () => {
+    it('아직 예약한 내용이 하나도 없으면 예약이 없다는 메시지를 화면에 출력하는가?', () => {
         render(<AppointmentsDayView appointments={[]} />);
         expect(container.textContent).toMatch(
             'There are no appointments scheduled for today.'
         );
     });
-    it('selects the first appointment by default', () => {
+    it('입력되어있는 예약 중에서 기본적으로 첫 번째 데이터가 선택되어 있는가?', () => {
         render(<AppointmentsDayView appointments={appointments} />);
         expect(container.textContent).toMatch('Ashley');
+    });
+    it('각 li 태그 엘리먼트에 button 엘리먼트가 들어 있는가?', () => {
+        render(<AppointmentsDayView appointments={appointments} />);
+        expect(container.querySelectorAll('li > button')).toHaveLength(2);
+        expect(container.querySelectorAll('li > button')[0].type).toEqual('button');
+    });
+    it.skip('다른 예약을 선택했을 때 화면에 정보가 잘 표시되는가?', () => {
+        render(<AppointmentsDayView appointments={appointments} />);
+        const button = container.querySelectorAll('button')[1];
+        ReactTestUtils.Simulate.click(button);
+        expect(container.textContent).toMatch('Jordan');
     });
 });

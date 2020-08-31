@@ -83,7 +83,7 @@ describe('AppointmentsDayView', () => {
         expect(container.querySelectorAll('li > button')).toHaveLength(2);
         expect(container.querySelectorAll('li > button')[0].type).toEqual('button');
     });
-    it.skip('다른 예약을 선택했을 때 화면에 정보가 잘 표시되는가?', () => {
+    it('다른 예약을 선택했을 때 화면에 정보가 잘 표시되는가?', () => {
         render(<AppointmentsDayView appointments={appointments} />);
         const button = container.querySelectorAll('button')[1];
         ReactTestUtils.Simulate.click(button);

@@ -4,4 +4,4 @@ import {storiesOf} from "@storybook/react";
 import {CustomerForm} from "../CustomerForm";
 
 storiesOf('CustomerForm', module)
-    .add('CustomerForm', () => <CustomerForm />);
+    .add('CustomerForm', () => <CustomerForm firstName="Ashley" />);

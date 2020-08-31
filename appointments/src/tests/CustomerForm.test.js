@@ -25,4 +25,9 @@ describe("CustomerForm", () => {
         const field = form('customer').elements.firstName;
         expectToBeInputFieldOfTypeText(field);
     });
+    it("텍스트 필드에 기본 퍼스트네임이 포함되어 있는가?", () => {
+        render(<CustomerForm firstName="Ashley" />);
+        const field = form('customer').elements.firstName;
+        expect(field.value).toEqual('Ashley');
+    });
 });

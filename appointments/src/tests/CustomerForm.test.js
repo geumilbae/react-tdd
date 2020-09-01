@@ -1,4 +1,5 @@
 import React from "react";
+import ReactTestUtils from "react-dom/test-utils";
 import {createContainer} from "./domManipulators";
 import {CustomerForm} from "../CustomerForm";
 
@@ -38,5 +39,17 @@ describe("CustomerForm", () => {
     it("퍼스트네임 필드의 id가 라벨의 id와 같도록 설정되었는가?", () => {
         render(<CustomerForm />);
         expect(firstNameField().id).toEqual('firstName');
+    });
+    it("서브밋을 했을 때 기존 퍼스트네임을 저장하는가?", async () => {
+        expect.hasAssertions();
+        render(
+            <CustomerForm
+                firstName="Ashley"
+                onSubmit={({firstName}) =>
+                    expect(firstName).toEqual('Ashley')
+                }
+            />
+        );
+        await ReactTestUtils.Simulate.submit(form('customer'));
     });
 });

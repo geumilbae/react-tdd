@@ -45,11 +45,20 @@ describe("CustomerForm", () => {
         render(
             <CustomerForm
                 firstName="Ashley"
-                onSubmit={({firstName}) =>
-                    expect(firstName).toEqual('Ashley')
-                }
+                onSubmit={({firstName}) => expect(firstName).toEqual('Ashley')}
             />
         );
+        await ReactTestUtils.Simulate.submit(form('customer'));
+    });
+    it("서브밋을 했을 때 새로운 퍼스트네임을 저장하는가?", async () => {
+        expect.hasAssertions();
+        render(
+            <CustomerForm
+                firstName="Ashley"
+                onSubmit={({firstName}) => expect(firstName).toEqual('Jamie')}
+            />
+        );
+        await ReactTestUtils.Simulate.change(firstNameField(), {target: {value: 'Jamie'}});
         await ReactTestUtils.Simulate.submit(form('customer'));
     });
 });

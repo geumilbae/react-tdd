@@ -19,6 +19,14 @@ describe("CustomerForm", () => {
         expect(form('customer')).not.toBeNull();
     });
 
+    it("서브밋 버튼이 있는가?", () => {
+        render(<CustomerForm />);
+        const submitButton = container.querySelector(
+            'input[type="submit"]'
+        );
+        expect(submitButton).not.toBeNull();
+    });
+
     const expectToBeInputFieldOfTypeText = formElement => {
         expect(formElement).not.toBeNull();
         expect(formElement.tagName).toEqual('INPUT');

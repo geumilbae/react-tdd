@@ -71,7 +71,11 @@ describe("CustomerForm", () => {
                     onSubmit={props => expect(props[fieldName]).toEqual(value)}
                 />
             );
-            await ReactTestUtils.Simulate.change(field(fieldName), {target: {value}});
+            await ReactTestUtils.Simulate.change(
+                field(fieldName),
+                {
+                    target: {value: 'newValue', name: fieldName}
+                });
             await ReactTestUtils.Simulate.submit(form('customer'));
         });
 

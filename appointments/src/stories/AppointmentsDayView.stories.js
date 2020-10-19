@@ -1,7 +1,7 @@
 import React from "react";
 import {storiesOf} from "@storybook/react";
 
-import {Appointment, AppointmentsDayView} from '../Appointment';
+import {Appointment, AppointmentsDayView} from '../AppointmentsDayView';
 
 export const customer = {
     firstName: "Ashley"
